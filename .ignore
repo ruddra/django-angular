@@ -1,0 +1,4 @@
+*.pyc
+*/__pycache__/*
+MovieDatabase/.idea
+MovieDatabase/MovieDatabase/local_settings.py

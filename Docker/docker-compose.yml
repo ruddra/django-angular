@@ -1,0 +1,28 @@
+version: '2'  
+services:  
+  nginx:
+    image: nginx:latest
+    container_name: nz02
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../MovieDatabase:/src
+      - ./nginx:/etc/nginx/conf.d
+      - ../Frontend:/Frontend
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: dz02
+    command: bash -c 'python manage.py runserver 0.0.0.0:8000'
+    depends_on:
+      - db
+    volumes:
+      - ../MovieDatabase:/src
+      - ../Frontend:/Frontend
+    expose:
+      - "8000"
+
+  db:
+    image: postgres:latest
+    container_name: pz02
